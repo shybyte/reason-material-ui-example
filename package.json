@@ -22,15 +22,15 @@
   "dependencies": {
     "bs-fetch": "github:buckletypes/bs-fetch",
     "bs-json": "github:buckletypes/bs-json",
+    "bs-platform": "^1.8.1",
     "json-server": "^0.11.0",
     "material-ui": "^0.18.6",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-tap-event-plugin": "^2.0.1",
-    "reason-react": ">=0.2.1"
+    "reason-react": ">=0.2.1",
+    "webpack": "^1.14.0"
   },
   "devDependencies": {
-    "bs-platform": "^1.8.1",
-    "webpack": "^1.14.0"
   }
 }
