@@ -10,7 +10,7 @@ let parseArticleJson json :article =>
 
 let parseArticlesResponseJson json => (Json.Decode.array parseArticleJson) json;
 
-let serviceBaseUrl = "http://localhost:8888/articles";
+let serviceBaseUrl = "/articles";
 
 let fetchArticles () =>
   Bs_fetch.fetch serviceBaseUrl |> Js.Promise.then_ Bs_fetch.Response.text |>

@@ -5,13 +5,15 @@
   "description": "ReasonML Example using Material-UI and a REST API",
   "main": "server/server.js",
   "scripts": {
+    "postinstall": "npm run bsb && npm run webpack",
     "clean": "bsb -clean-world",
     "server": "json-server --watch server/data.json --port 8888",
     "browsersync": "browser-sync start --server --files 'bundledOutputs/**/*.js' --files 'src/**/*.css'",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server/server.js",
     "bsb": "bsb -make-world",
-    "bsbTest": "bsb -make-world -w",
+    "bsbWatch": "bsb -make-world -w",
+    "webpack": "webpack",
     "build": "webpack -w"
   },
   "keywords": [],

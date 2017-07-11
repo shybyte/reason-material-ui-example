@@ -1,4 +1,5 @@
 bundledOutputs
+src/bundledOutputs
 lib
 node_modules
 .merlin

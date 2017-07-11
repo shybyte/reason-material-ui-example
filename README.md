@@ -9,12 +9,10 @@ Run this project:
 ```
 npm install
 npm start
-# in another tab
-npm run build
-# in another tab
-npm run server
-# in another tab
-npm run browsersync
 ```
 
-Open http://localhost:3000/src/ in your browser.
+Open http://localhost:3000 in your browser.
+
+# Run in development mode
+
+TODO

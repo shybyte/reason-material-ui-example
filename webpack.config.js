@@ -5,7 +5,7 @@ module.exports = {
     app: './lib/js/src/app.js',
   },
   output: {
-    path: path.join(__dirname, "bundledOutputs"),
+    path: path.join(__dirname, "src/bundledOutputs"),
     filename: '[name].js',
   },
 };
