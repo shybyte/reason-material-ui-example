@@ -1,0 +1,30 @@
+body {
+  font-size: 15px
+}
+
+
+h1 {
+  font-size: 20px
+}
+
+table {
+  min-width: 400px;
+}
+
+th {
+  background: #eee;
+  text-align: left;
+  color: #555;
+}
+
+td, th {
+  padding: 5px;
+}
+
+td {
+  border-bottom: 1px solid #eee;
+}
+
+.menuColumn {
+  width: 10px;
+}

@@ -1,0 +1,6 @@
+bundledOutputs
+lib
+node_modules
+.merlin
+npm-debug.log
+.idea
