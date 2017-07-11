@@ -3,13 +3,15 @@
   "private": true,
   "version": "0.1.0",
   "description": "ReasonML Example using Material-UI and a REST API",
-  "main": "index.js",
+  "main": "server/server.js",
   "scripts": {
     "clean": "bsb -clean-world",
     "server": "json-server --watch server/data.json --port 8888",
     "browsersync": "browser-sync start --server --files 'bundledOutputs/**/*.js' --files 'src/**/*.css'",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "bsb -make-world -w",
+    "start": "node server/server.js",
+    "bsb": "bsb -make-world",
+    "bsbTest": "bsb -make-world -w",
     "build": "webpack -w"
   },
   "keywords": [],
