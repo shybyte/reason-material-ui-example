@@ -2,6 +2,8 @@
 
 This example uses [ReasonReact](https://github.com/reasonml/reason-react), [Material-UI](http://www.material-ui.com/) and a REST API.
 
+See it live in action: [https://reason-material-ui-example.herokuapp.com/](https://reason-material-ui-example.herokuapp.com/)
+
 Have something you don't understand? Join us on [Discord](https://discord.gg/reasonml)!
 
 Run this project:
