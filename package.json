@@ -21,6 +21,7 @@
   "author": "Marco Stahl",
   "license": "MIT",
   "dependencies": {
+    "ajv": "^5.2.2",
     "json-server": "^0.11.0"
   },
   "devDependencies": {
