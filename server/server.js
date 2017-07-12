@@ -6,7 +6,7 @@ const conf = {static: path.join(process.cwd(), "src")};
 console.log(conf);
 const middlewares = jsonServer.defaults(conf);
 const fs = require('fs');
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8888;
 
 server.use(middlewares);
 server.use(router);

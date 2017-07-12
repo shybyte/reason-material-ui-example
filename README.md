@@ -12,8 +12,13 @@ npm build
 npm start
 ```
 
-Open http://localhost:3000 in your browser.
+Open http://localhost:8888 in your browser.
 
 # Run in development mode
 
-TODO
+```
+npm install
+npm dev
+```
+
+Open http://localhost:3000 in your browser.
