@@ -2,11 +2,18 @@
   "articles": [
     {
       "id": "1",
-      "title": "Article 1"
+      "title": "Default Article 1",
+      "default": true
     },
     {
       "id": "2",
-      "title": "Article 2"
+      "title": "Default Article 2",
+      "default": true
+    },
+    {
+      "id": "3",
+      "title": "Article 3",
+      "default": false
     }
   ]
 }

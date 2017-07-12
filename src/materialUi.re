@@ -88,11 +88,12 @@ module MoreVertIcon = {
 };
 
 module MenuItem = {
-  let make ::primaryText ::onTouchTap ::className=? children =>
+  let make ::primaryText ::onTouchTap ::className=? ::disabled=? children =>
     ReasonReact.wrapJsForReason
       reactClass::menuItem
       props:: {
         "className": Js.Null_undefined.from_opt className,
+        "disabled": disabled |> Option.default false |> Js.Boolean.to_js_boolean  ,
         "primaryText": primaryText,
         "onTouchTap": onTouchTap
       }

@@ -63,6 +63,7 @@ let make _children => {
           />
           <MenuItem
             primaryText="Delete"
+            disabled=article.default
             onTouchTap=(
               fun () => {
                 Js.log ("Delete " ^ article.title);
