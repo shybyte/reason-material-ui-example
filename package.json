@@ -9,7 +9,7 @@
     "clean": "bsb -clean-world",
     "server": "json-server --watch server/data.json --port 8888",
     "browsersync": "browser-sync start --server --files 'bundledOutputs/**/*.js' --files 'src/**/*.css'",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"If it compiles, it works!\"",
     "start": "node server/server.js",
     "bsb": "bsb -make-world",
     "bsbWatch": "bsb -make-world -w",
