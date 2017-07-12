@@ -1,4 +1,4 @@
-# Reason Material-UI Example
+# Reason Material-UI Example [![Build Status](https://travis-ci.org/shybyte/reason-material-ui-example.svg?branch=master)](https://travis-ci.org/shybyte/reason-material-ui-example)
 
 This example uses [ReasonReact](https://github.com/reasonml/reason-react), [Material-UI](http://www.material-ui.com/) and a REST API.
 
