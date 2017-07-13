@@ -10,7 +10,7 @@ type appState = {
 let handleArticlesLoaded articles {ReasonReact.state: state} =>
   ReasonReact.Update {...state, articles: Some articles};
 
-let component = ReasonReact.statefulComponent "Greeting";
+let component = ReasonReact.statefulComponent "ArticlesOverview";
 
 let make _children => {
   let toggleDialog _event {ReasonReact.state: state} =>
@@ -26,22 +26,26 @@ let make _children => {
     ) |> ignore;
     ReasonReact.NoUpdate
   };
+  let addArticle title self => {
+    Webservice.create title |>
+    Js.Promise.then_ (
+      fun _result => {
+        reload self |> ignore;
+        Js.Promise.resolve ()
+      }
+    ) |> ignore;
+    ReasonReact.Update {...self.state, isDialogOpen: false}
+  };
   {
     ...component,
     initialState: fun () => {isDialogOpen: false, articles: None},
     didMount: fun self => reload self,
     render: fun self => {
       let toggleDialog = self.update toggleDialog;
-      let okButton = <FlatButton label="OK" onClick=toggleDialog />;
-      let cancelButton = <FlatButton label="Cancel" onClick=toggleDialog />;
-      let actions = [|cancelButton, okButton|];
       let renderMenuButton (article: Webservice.article) => {
         let iconButton = <IconButton> <MoreVertIcon /> </IconButton>;
         <IconMenu iconButtonElement=iconButton>
-          <MenuItem
-            primaryText="Edit"
-            onTouchTap=(fun () => Js.log ("Edit " ^ article.title))
-          />
+          <MenuItem primaryText="Edit" onTouchTap=(fun () => Js.log ("Edit " ^ article.title)) />
           <MenuItem
             primaryText="Copy"
             onTouchTap=(
@@ -53,7 +57,7 @@ let make _children => {
                     reload self |> ignore;
                     Js.Promise.resolve ()
                   }
-                ) |> ignore;
+                ) |> ignore
               }
             )
           />
@@ -73,7 +77,7 @@ let make _children => {
                     reload self |> ignore;
                     Js.Promise.resolve ()
                   }
-                ) |> ignore;
+                ) |> ignore
               }
             )
           />
@@ -87,14 +91,12 @@ let make _children => {
       <div>
         <MuiThemeProvider>
           <div>
-            <RaisedButton label="Open Dialog!" onClick=toggleDialog />
-            <Dialog
-              onRequestClose=toggleDialog
+            <AddArticleDialog
+              onOk=(self.update addArticle)
+              onCancel=toggleDialog
               isOpen=self.state.isDialogOpen
-              title="Dialog Title"
-              actions>
-              (se "Dialog Content")
-            </Dialog>
+            />
+            <RaisedButton label="Add Article" onClick=toggleDialog />
             <h1> (se "Articles") </h1>
             <table>
               <colgroup> <col className="menuColumn" /> </colgroup>

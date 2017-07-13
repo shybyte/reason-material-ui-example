@@ -2,6 +2,7 @@ external raisedButton: ReasonReact.reactClass = "default" [@@bs.val] [@@bs.modul
 external muiThemeProvider: ReasonReact.reactClass = "default" [@@bs.val] [@@bs.module "material-ui/styles/MuiThemeProvider"];
 external flatButton: ReasonReact.reactClass = "default" [@@bs.val] [@@bs.module "material-ui/FlatButton"];
 external dialog: ReasonReact.reactClass = "default" [@@bs.val] [@@bs.module "material-ui/Dialog"];
+external textfield: ReasonReact.reactClass = "default" [@@bs.val] [@@bs.module "material-ui/TextField"];
 external injectTapEventPlugin : unit =>  unit = "react-tap-event-plugin" [@@bs.module];
 
 external iconMenu: ReasonReact.reactClass = "default" [@@bs.val] [@@bs.module "material-ui/IconMenu"];
@@ -96,6 +97,22 @@ module MenuItem = {
         "disabled": disabled |> Option.default false |> Js.Boolean.to_js_boolean  ,
         "primaryText": primaryText,
         "onTouchTap": onTouchTap
+      }
+      children;
+};
+
+module TextField = {
+  let make ::id=? ::defaultValue ::hintText=? ::autoFocus=? ::onChange children =>
+    ReasonReact.wrapJsForReason
+      reactClass::textfield
+      props:: {
+        "id": id |> Option.default "textfieldId" ,
+        "autoFocus": autoFocus |> Option.default false |> Js.Boolean.to_js_boolean  ,
+        "defaultValue": defaultValue,
+        "hintText": hintText |> Option.default "",
+        "onChange": fun _ev value => {
+          onChange value;
+        }
       }
       children;
 };
