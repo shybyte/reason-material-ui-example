@@ -102,7 +102,7 @@ module MenuItem = {
 };
 
 module TextField = {
-  let make ::id=? ::defaultValue ::hintText=? ::autoFocus=? ::onChange children =>
+  let make ::id=? ::defaultValue ::hintText=? ::autoFocus=? ::onChange style::(style: option ReactDOMRe.style)=? children =>
     ReasonReact.wrapJsForReason
       reactClass::textfield
       props:: {
@@ -112,7 +112,8 @@ module TextField = {
         "hintText": hintText |> Option.default "",
         "onChange": fun _ev value => {
           onChange value;
-        }
+        },
+        "style": style |> Option.default (ReactDOMRe.Style.make ())
       }
       children;
 };
