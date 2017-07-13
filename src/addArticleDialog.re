@@ -4,14 +4,17 @@ open MaterialUi;
 
 type dialogState = {title: string};
 
-let component = ReasonReact.statefulComponent "AddArticleDialog";
+let component = ReasonReact.statefulComponentWithRetainedProps "AddArticleDialog";
 
-let make ::onOk ::onCancel ::isOpen _children => {
+let make ::onOk ::onCancel isOpen::(isOpen: bool) _children => {
   let onChange newValue {ReasonReact.state: _state} => ReasonReact.Update {title: newValue};
   {
     ...component,
     initialState: fun () => {title: ""},
+    retainedProps: isOpen,
     didMount: fun _self => ReasonReact.NoUpdate,
+    willReceiveProps: fun self => {
+      if (self.retainedProps && not isOpen) {{title: ""}} else {self.state}},
     render: fun self => {
       let okButton = <FlatButton label="OK" onClick=(fun () => onOk self.state.title) />;
       let cancelButton = <FlatButton label="Cancel" onClick=onCancel />;
@@ -28,7 +31,7 @@ let make ::onOk ::onCancel ::isOpen _children => {
             onChange=(self.update onChange)
             autoFocus=true
             hintText="Article Title"
-            defaultValue=self.state.title
+            value=self.state.title
             style=(ReactDOMRe.Style.make  width::"100%" ())
           />
         </form>
