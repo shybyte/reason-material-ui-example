@@ -30,3 +30,11 @@ let create title => {
   Bs_fetch.fetchWithInit serviceBaseUrl (RequestInit.make method_::Post ::headers ::body ()) |>
   Js.Promise.then_ Bs_fetch.Response.text
 };
+
+let rename articleId newTitle => {
+  let headers = Bs_fetch.HeadersInit.make {"Content-Type": "application/json"};
+  let bodyJsObject = {"title": newTitle};
+  let body = bodyJsObject |> Js.Json.stringifyAny |> Option.get |> BodyInit.make;
+  Bs_fetch.fetchWithInit (serviceBaseUrl ^ "/" ^ articleId) (RequestInit.make method_::Patch ::headers ::body ()) |>
+  Js.Promise.then_ Bs_fetch.Response.text
+};

@@ -108,7 +108,7 @@ module TextField = {
       props:: {
         "id": id |> Option.default "textfieldId" ,
         "autoFocus": autoFocus |> Option.default false |> Js.Boolean.to_js_boolean  ,
-        "Value": value,
+        "value": value,
         "hintText": hintText |> Option.default "",
         "onChange": fun _ev value => {
           onChange value;
