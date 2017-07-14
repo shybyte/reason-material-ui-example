@@ -9,6 +9,7 @@ external iconMenu: ReasonReact.reactClass = "default" [@@bs.val] [@@bs.module "m
 external menuItem: ReasonReact.reactClass = "default" [@@bs.val] [@@bs.module "material-ui/MenuItem"];
 external iconButton: ReasonReact.reactClass = "default" [@@bs.val] [@@bs.module "material-ui/IconButton"];
 external moreVertIcon: ReasonReact.reactClass = "default" [@@bs.val] [@@bs.module "material-ui/svg-icons/navigation/more-vert"];
+external lock: ReasonReact.reactClass = "default" [@@bs.val] [@@bs.module "material-ui/svg-icons/action/lock"];
 
 let component = ReasonReact.statelessComponent "Component";
 
@@ -88,15 +89,32 @@ module MoreVertIcon = {
       children;
 };
 
+module LockIcon = {
+  let make ::className=? ::title=? children =>
+    ReasonReact.wrapJsForReason
+      reactClass::lock
+      props:: {
+        "className": Js.Null_undefined.from_opt className,
+        "title": Js.Null_undefined.from_opt title,
+        "style": {
+          "width": "16px",
+          "height": "16px"
+        }
+      }
+      children;
+};
+
 module MenuItem = {
-  let make ::primaryText ::onTouchTap ::className=? ::disabled=? children =>
+  let make ::primaryText ::onTouchTap ::title=? ::rightIcon=? ::className=? ::disabled=? children =>
     ReasonReact.wrapJsForReason
       reactClass::menuItem
       props:: {
         "className": Js.Null_undefined.from_opt className,
         "disabled": disabled |> Option.default false |> Js.Boolean.to_js_boolean  ,
         "primaryText": primaryText,
-        "onTouchTap": onTouchTap
+        "onTouchTap": onTouchTap,
+        "rightIcon": Js.Null_undefined.from_opt rightIcon,
+        "title": Js.Null_undefined.from_opt title
       }
       children;
 };

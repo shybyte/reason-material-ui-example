@@ -46,3 +46,15 @@ td {
 #index {
   padding: 1em;
 }
+
+.icon, .iconHover {
+  opacity: 0.5;
+}
+
+.iconHover:hover {
+  opacity: 1;
+}
+
+.floatRight {
+  float: right;
+}

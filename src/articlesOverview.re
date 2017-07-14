@@ -50,10 +50,8 @@ let make _children => {
           reload self |> ignore;
           Js.Promise.resolve ()
         }
-      ) |> ignore;
-    | _ => {
-      Js.log2 "Expected RENAME state but got" self.state;
-    }
+      ) |> ignore
+    | _ => Js.log2 "Expected RENAME state but got" self.state
     };
     ReasonReact.Update {...self.state, openedDialog: ARCTICLE_DIALOG_CLOSED}
   };
@@ -63,7 +61,7 @@ let make _children => {
     didMount: fun self => reload self,
     render: fun self => {
       let renderMenuButton (article: Webservice.article) => {
-        let iconButton = <IconButton> <MoreVertIcon /> </IconButton>;
+        let iconButton = <IconButton> <MoreVertIcon className="iconHover" /> </IconButton>;
         <IconMenu iconButtonElement=iconButton>
           <MenuItem
             primaryText="Copy"
@@ -83,11 +81,15 @@ let make _children => {
           <MenuItem
             primaryText="Rename"
             disabled=article.default
+            title=(article.default ? "This article is readonly. You can't rename it" : "")
+            rightIcon=(article.default ? <LockIcon className="" /> : ReasonReact.nullElement)
             onTouchTap=(self.update (toggleDialog (RENAME article)))
           />
           <MenuItem
             primaryText="Delete"
             disabled=article.default
+            title=(article.default ? "This article is readonly. You can't delete it." : "Are you sure?")
+            rightIcon=(article.default ? <LockIcon className="" /> : ReasonReact.nullElement)
             onTouchTap=(
               fun () => {
                 Js.log ("Delete " ^ article.title);
@@ -106,7 +108,16 @@ let make _children => {
       let renderRow (article: Webservice.article) =>
         <tr key=article.id>
           <td> (renderMenuButton article) </td>
-          <td> (se article.title) </td>
+          <td>
+            (se article.title)
+            (
+              article.default ?
+                <div className="floatRight" title="This article is readonly.">
+                  <LockIcon className="icon" />
+                </div> :
+                ReasonReact.nullElement
+            )
+          </td>
         </tr>;
       <div>
         <MuiThemeProvider>
