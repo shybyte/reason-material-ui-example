@@ -1,10 +1,6 @@
 open Bs_fetch;
 
-type article = {
-  id: string,
-  title: string,
-  default: bool
-};
+open Model;
 
 let parseArticleJson json :article =>
   Json.Decode.{id: field "id" string json, title: field "title" string json, default: field "default" bool json};

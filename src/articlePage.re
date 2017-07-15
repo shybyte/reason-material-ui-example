@@ -1,7 +1,7 @@
 let se = ReasonReact.stringToElement;
 
 
-type componentState = {article: option Webservice.article};
+type componentState = {article: option Model.article};
 
 let handleArticleLoaded article {ReasonReact.state: _state} =>
   ReasonReact.Update {article: Some article};

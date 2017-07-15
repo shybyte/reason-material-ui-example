@@ -4,12 +4,12 @@ open MaterialUi;
 
 type articleDialogState =
   | ADD
-  | RENAME Webservice.article
+  | RENAME Model.article
   | ARCTICLE_DIALOG_CLOSED;
 
 type appState = {
   openedDialog: articleDialogState,
-  articles: option (array Webservice.article)
+  articles: option (array Model.article)
 };
 
 let handleArticlesLoaded articles {ReasonReact.state: state} =>
@@ -60,7 +60,7 @@ let make ::router _children => {
     initialState: fun () => {openedDialog: ARCTICLE_DIALOG_CLOSED, articles: None},
     didMount: fun self => reload self,
     render: fun self => {
-      let renderMenuButton (article: Webservice.article) => {
+      let renderMenuButton (article: Model.article) => {
         let iconButton = <IconButton> <MoreVertIcon className="iconHover" /> </IconButton>;
         <IconMenu iconButtonElement=iconButton>
           <MenuItem
@@ -111,7 +111,7 @@ let make ::router _children => {
           />
         </IconMenu>
       };
-      let renderRow (article: Webservice.article) =>
+      let renderRow (article: Model.article) =>
         <tr key=article.id>
           <td> (renderMenuButton article) </td>
           <td>
