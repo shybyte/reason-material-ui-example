@@ -17,7 +17,7 @@ let handleArticlesLoaded articles {ReasonReact.state: state} =>
 
 let component = ReasonReact.statefulComponent "ArticlesOverview";
 
-let make _children => {
+let make ::router _children => {
   let toggleDialog newArticleDialogType _event {ReasonReact.state: state} =>
     ReasonReact.Update {...state, openedDialog: newArticleDialogType};
   let reload {ReasonReact.update: update} => {
@@ -64,6 +64,10 @@ let make _children => {
         let iconButton = <IconButton> <MoreVertIcon className="iconHover" /> </IconButton>;
         <IconMenu iconButtonElement=iconButton>
           <MenuItem
+            primaryText="Edit"
+            onTouchTap=(fun () => DirectorRe.setRoute router ("/article/" ^ article.id))
+          />
+          <MenuItem
             primaryText="Copy"
             onTouchTap=(
               fun () => {
@@ -88,7 +92,9 @@ let make _children => {
           <MenuItem
             primaryText="Delete"
             disabled=article.default
-            title=(article.default ? "This article is readonly. You can't delete it." : "Are you sure?")
+            title=(
+              article.default ? "This article is readonly. You can't delete it." : "Are you sure?"
+            )
             rightIcon=(article.default ? <LockIcon className="" /> : ReasonReact.nullElement)
             onTouchTap=(
               fun () => {
@@ -109,7 +115,7 @@ let make _children => {
         <tr key=article.id>
           <td> (renderMenuButton article) </td>
           <td>
-            (se article.title)
+            <a href=("#/article/" ^ article.id)> (se article.title) </a>
             (
               article.default ?
                 <div className="floatRight" title="This article is readonly.">

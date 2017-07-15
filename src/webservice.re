@@ -19,6 +19,12 @@ let fetchArticles () =>
     fun jsonText => Js.Promise.resolve (parseArticlesResponseJson (Js.Json.parseExn jsonText))
   );
 
+let fetchArticle id =>
+  Bs_fetch.fetch (serviceBaseUrl ^ "/" ^ id) |> Js.Promise.then_ Bs_fetch.Response.text |>
+  Js.Promise.then_ (
+    fun jsonText => Js.Promise.resolve (parseArticleJson (Js.Json.parseExn jsonText))
+  );  
+
 let delete articleId =>
   Bs_fetch.fetchWithInit (serviceBaseUrl ^ "/" ^ articleId) (RequestInit.make method_::Delete ()) |>
   Js.Promise.then_ Bs_fetch.Response.text;

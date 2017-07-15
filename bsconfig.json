@@ -5,6 +5,6 @@
 {
   "name" : "reason-material-ui-example",
   "reason" : {"react-jsx" : 2},
-  "bs-dependencies": ["reason-react", "bs-fetch", "bs-json"],
+  "bs-dependencies": ["reason-react", "bs-fetch", "bs-json", "bs-director"],
   "sources": "src"
 }
