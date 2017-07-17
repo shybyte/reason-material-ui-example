@@ -10,7 +10,7 @@ Run this project:
 
 ```
 npm install
-npm build
+npm run build
 npm start
 ```
 
@@ -20,7 +20,7 @@ Open http://localhost:8888 in your browser.
 
 ```
 npm install
-npm dev
+npm run dev
 ```
 
 Open http://localhost:3000 in your browser.
