@@ -14,15 +14,18 @@ const validateArticle = ajv.compile(
     "title": "Article",
     "type": "object",
     "properties": {
-        "title": {
-            "type": "string"
-        },
-        "default": {
-            "type": "boolean"
-        },
+      "title": {
+        "type": "string"
+      },
+      "text": {
+        "type": "string"
+      },
+      "default": {
+        "type": "boolean"
+      },
     },
-    "required": ["title", "default"]
-});
+    "required": ["title", "default", "text"]
+  });
 
 server.use(middlewares);
 server.use(jsonServer.bodyParser)
@@ -48,7 +51,7 @@ server.post('/articles', (req, res, next) => {
   const valid = validateArticle(req.body);
   if (!valid) {
     res.status(400);
-    res.json({errors: validateArticle.errors});
+    res.json({ errors: validateArticle.errors });
     return;
   }
   next();

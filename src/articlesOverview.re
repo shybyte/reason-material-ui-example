@@ -86,7 +86,7 @@ let make ::router _children => {
             primaryText="Rename"
             disabled=article.default
             title=(article.default ? "This article is readonly. You can't rename it" : "")
-            rightIcon=(article.default ? <LockIcon className="" /> : ReasonReact.nullElement)
+            rightIcon=(article.default ? <LockIcon/> : ReasonReact.nullElement)
             onTouchTap=(self.update (toggleDialog (RENAME article)))
           />
           <MenuItem
@@ -95,7 +95,7 @@ let make ::router _children => {
             title=(
               article.default ? "This article is readonly. You can't delete it." : "Are you sure?"
             )
-            rightIcon=(article.default ? <LockIcon className="" /> : ReasonReact.nullElement)
+            rightIcon=(article.default ? <LockIcon/> : ReasonReact.nullElement)
             onTouchTap=(
               fun () => {
                 Js.log ("Delete " ^ article.title);

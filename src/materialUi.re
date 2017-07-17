@@ -1,25 +1,44 @@
-external raisedButton: ReasonReact.reactClass = "default" [@@bs.val] [@@bs.module "material-ui/RaisedButton"];
-external muiThemeProvider: ReasonReact.reactClass = "default" [@@bs.val] [@@bs.module "material-ui/styles/MuiThemeProvider"];
-external flatButton: ReasonReact.reactClass = "default" [@@bs.val] [@@bs.module "material-ui/FlatButton"];
-external dialog: ReasonReact.reactClass = "default" [@@bs.val] [@@bs.module "material-ui/Dialog"];
-external textfield: ReasonReact.reactClass = "default" [@@bs.val] [@@bs.module "material-ui/TextField"];
-external injectTapEventPlugin : unit =>  unit = "react-tap-event-plugin" [@@bs.module];
+external raisedButton : ReasonReact.reactClass =
+  "default" [@@bs.val] [@@bs.module "material-ui/RaisedButton"];
 
-external iconMenu: ReasonReact.reactClass = "default" [@@bs.val] [@@bs.module "material-ui/IconMenu"];
-external menuItem: ReasonReact.reactClass = "default" [@@bs.val] [@@bs.module "material-ui/MenuItem"];
-external iconButton: ReasonReact.reactClass = "default" [@@bs.val] [@@bs.module "material-ui/IconButton"];
-external moreVertIcon: ReasonReact.reactClass = "default" [@@bs.val] [@@bs.module "material-ui/svg-icons/navigation/more-vert"];
-external lock: ReasonReact.reactClass = "default" [@@bs.val] [@@bs.module "material-ui/svg-icons/action/lock"];
+external muiThemeProvider : ReasonReact.reactClass =
+  "default" [@@bs.val] [@@bs.module "material-ui/styles/MuiThemeProvider"];
+
+external flatButton : ReasonReact.reactClass =
+  "default" [@@bs.val] [@@bs.module "material-ui/FlatButton"];
+
+external dialog : ReasonReact.reactClass = "default" [@@bs.val] [@@bs.module "material-ui/Dialog"];
+
+external textfield : ReasonReact.reactClass =
+  "default" [@@bs.val] [@@bs.module "material-ui/TextField"];
+
+external injectTapEventPlugin : unit => unit = "react-tap-event-plugin" [@@bs.module];
+
+external iconMenu : ReasonReact.reactClass =
+  "default" [@@bs.val] [@@bs.module "material-ui/IconMenu"];
+
+external menuItem : ReasonReact.reactClass =
+  "default" [@@bs.val] [@@bs.module "material-ui/MenuItem"];
+
+external iconButton : ReasonReact.reactClass =
+  "default" [@@bs.val] [@@bs.module "material-ui/IconButton"];
+
+external moreVertIcon : ReasonReact.reactClass =
+  "default" [@@bs.val] [@@bs.module "material-ui/svg-icons/navigation/more-vert"];
+
+external lock : ReasonReact.reactClass =
+  "default" [@@bs.val] [@@bs.module "material-ui/svg-icons/action/lock"];
 
 let component = ReasonReact.statelessComponent "Component";
 
 module RaisedButton = {
-  let make ::label ::onClick children =>
+  let make ::label ::onClick ::disabled=false children =>
     ReasonReact.wrapJsForReason
       reactClass::raisedButton
       props::{
-        "label": label, /* OCaml string maps to JS string, no conversion needed here */
-        "onClick": onClick /* OCaml string maps to JS string, no conversion needed here */
+        "label": label, 
+        "onClick": onClick,
+        "disabled": Js.Boolean.to_js_boolean disabled 
       }
       children;
 };
@@ -38,11 +57,7 @@ module FlatButton = {
 module MuiThemeProvider = {
   let make children =>
     ReasonReact.wrapJsForReason
-      reactClass::muiThemeProvider
-      props::{
-        "className": "className" 
-      }
-      children;
+      reactClass::muiThemeProvider props::{"className": "className"} children;
 };
 
 module Dialog = {
@@ -51,9 +66,9 @@ module Dialog = {
       reactClass::dialog
       props::{
         "title": Js.Null_undefined.from_opt title,
-        "onRequestClose": onRequestClose, 
-        "open": Js.Boolean.to_js_boolean isOpen, 
-        "actions": actions 
+        "onRequestClose": onRequestClose,
+        "open": Js.Boolean.to_js_boolean isOpen,
+        "actions": actions
       }
       children;
 };
@@ -62,7 +77,7 @@ module IconMenu = {
   let make ::className=? ::iconButtonElement children =>
     ReasonReact.wrapJsForReason
       reactClass::iconMenu
-      props:: {
+      props::{
         "className": Js.Null_undefined.from_opt className,
         "iconButtonElement": iconButtonElement
       }
@@ -72,34 +87,23 @@ module IconMenu = {
 module IconButton = {
   let make ::className=? children =>
     ReasonReact.wrapJsForReason
-      reactClass::iconButton
-      props:: {
-        "className": Js.Null_undefined.from_opt className
-      }
-      children;
+      reactClass::iconButton props::{"className": Js.Null_undefined.from_opt className} children;
 };
 
 module MoreVertIcon = {
   let make ::className=? children =>
     ReasonReact.wrapJsForReason
-      reactClass::moreVertIcon
-      props:: {
-        "className": Js.Null_undefined.from_opt className
-      }
-      children;
+      reactClass::moreVertIcon props::{"className": Js.Null_undefined.from_opt className} children;
 };
 
 module LockIcon = {
   let make ::className=? ::title=? children =>
     ReasonReact.wrapJsForReason
       reactClass::lock
-      props:: {
+      props::{
         "className": Js.Null_undefined.from_opt className,
         "title": Js.Null_undefined.from_opt title,
-        "style": {
-          "width": "16px",
-          "height": "16px"
-        }
+        "style": {"width": "16px", "height": "16px"}
       }
       children;
 };
@@ -108,9 +112,9 @@ module MenuItem = {
   let make ::primaryText ::onTouchTap ::title=? ::rightIcon=? ::className=? ::disabled=? children =>
     ReasonReact.wrapJsForReason
       reactClass::menuItem
-      props:: {
+      props::{
         "className": Js.Null_undefined.from_opt className,
-        "disabled": disabled |> Option.default false |> Js.Boolean.to_js_boolean  ,
+        "disabled": disabled |> Option.default false |> Js.Boolean.to_js_boolean,
         "primaryText": primaryText,
         "onTouchTap": onTouchTap,
         "rightIcon": Js.Null_undefined.from_opt rightIcon,
@@ -120,18 +124,31 @@ module MenuItem = {
 };
 
 module TextField = {
-  let make ::id=? ::value ::hintText=? ::autoFocus=? ::onChange style::(style: option ReactDOMRe.style)=? children =>
+  let make
+      ::id=?
+      ::value
+      ::hintText=?
+      ::autoFocus=?
+      ::onChange
+      ::floatingLabelText=?
+      ::multiLine=false
+      ::disabled=false
+      ::rows=?
+      style::(style: option ReactDOMRe.style)=?
+      children =>
     ReasonReact.wrapJsForReason
       reactClass::textfield
-      props:: {
-        "id": id |> Option.default "textfieldId" ,
-        "autoFocus": autoFocus |> Option.default false |> Js.Boolean.to_js_boolean  ,
+      props::{
+        "id": id |> Option.default "textfieldId",
+        "autoFocus": autoFocus |> Option.default false |> Js.Boolean.to_js_boolean,
         "value": value,
         "hintText": hintText |> Option.default "",
-        "onChange": fun _ev value => {
-          onChange value;
-        },
-        "style": style |> Option.default (ReactDOMRe.Style.make ())
+        "onChange": fun _ev value => onChange value,
+        "style": style |> Option.default (ReactDOMRe.Style.make ()),
+        "floatingLabelText": Js.Null_undefined.from_opt floatingLabelText,
+        "multiLine": Js.Boolean.to_js_boolean multiLine,
+        "disabled": Js.Boolean.to_js_boolean disabled,
+        "rows": Js.Null_undefined.from_opt rows
       }
       children;
 };
